@@ -10,9 +10,6 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 
 // Mock Linking
 import { Linking } from 'react-native';
-jest.mock('react-native/Libraries/Linking/Linking', () => ({
-  openURL: jest.fn(),
-}));
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -79,8 +76,7 @@ describe('AutoUpdateOverlay', () => {
   });
 
   it('opens the store link when the update button is pressed', async () => {
-    const mockLinkingOpenURL = jest.fn();
-    Linking.openURL = mockLinkingOpenURL;
+    const mockLinkingOpenURL = jest.spyOn(Linking, 'openURL').mockImplementation(jest.fn());
 
     const { getByText } = setup({
       currentVersion: '1.2.0',
@@ -93,6 +89,7 @@ describe('AutoUpdateOverlay', () => {
     });
 
     expect(mockLinkingOpenURL).toHaveBeenCalledWith('https://example.com/ios');
+    mockLinkingOpenURL.mockRestore();
   });
 
   it('hides the overlay when "Skip for now" is pressed', async () => {
