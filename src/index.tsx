@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -90,7 +90,7 @@ export const AutoUpdateOverlay = ({
   const [whatsNewContent, setWhatsNewContent] = useState<string>('');
   const [latestVersion, setLatestVersion] = useState('');
 
-  const fetchGooglePlayVersion = async () => {
+  const fetchGooglePlayVersion = useCallback(async () => {
     try {
       const googlePlayResponse = await fetch(androidStoreLink);
       const googlePlayText = await googlePlayResponse.text();
@@ -145,9 +145,9 @@ export const AutoUpdateOverlay = ({
     } catch (error) {
       console.error('Error fetching Google Play Store version:', error);
     }
-  };
+  }, [androidStoreLink, currentVersion]);
 
-  const fetchAppStoreVersion = async () => {
+  const fetchAppStoreVersion = useCallback(async () => {
     try {
       const appStoreResponse = await fetch(iosStoreLink);
       const appStoreText = await appStoreResponse.text();
@@ -200,9 +200,9 @@ export const AutoUpdateOverlay = ({
     } catch (error) {
       console.error('Error fetching App Store version:', error);
     }
-  };
+  }, [iosStoreLink, currentVersion]);
 
-  const fetchWhatsNew = async () => {
+  const fetchWhatsNew = useCallback(async () => {
     if (Platform.OS == 'android') {
       const googlePlayResponse = await fetch(androidStoreLink);
       const googlePlayText = await googlePlayResponse.text();
@@ -233,9 +233,9 @@ export const AutoUpdateOverlay = ({
         }
       }
     }
-  };
+  }, [androidStoreLink, iosStoreLink]);
 
-  const checkIfUserUpdated = async () => {
+  const checkIfUserUpdated = useCallback(async () => {
     try {
       const storedVersion = await getStoredValue({
         storageTag: STORED_VERSION_UPDATE_KEY,
@@ -265,7 +265,7 @@ export const AutoUpdateOverlay = ({
     } catch (e) {
       console.log(e, 'Error story current version');
     }
-  };
+  }, [currentVersion, whatsNewDescription, fetchWhatsNew]);
 
   const onDownloadButtonPress = () => {
     Linking.openURL(Platform.OS == 'ios' ? iosStoreLink : androidStoreLink);
@@ -280,7 +280,15 @@ export const AutoUpdateOverlay = ({
     if (isWhatsNewRequired) {
       checkIfUserUpdated();
     }
-  }, [currentVersion, iosStoreLink, androidStoreLink, isWhatsNewRequired]);
+  }, [
+    currentVersion,
+    iosStoreLink,
+    androidStoreLink,
+    isWhatsNewRequired,
+    fetchAppStoreVersion,
+    fetchGooglePlayVersion,
+    checkIfUserUpdated,
+  ]);
 
   return (
     <>
@@ -440,7 +448,7 @@ export const ManualUpdateOverlay = ({
   const [isAppUpdated, setIsAppUpdated] = useState<boolean>(false);
   const [whatsNewContent, setWhatsNewContent] = useState<string>('');
 
-  const fetchWhatsNew = async () => {
+  const fetchWhatsNew = useCallback(async () => {
     if (Platform.OS == 'android') {
       const googlePlayResponse = await fetch(androidStoreLink);
       const googlePlayText = await googlePlayResponse.text();
@@ -470,9 +478,9 @@ export const ManualUpdateOverlay = ({
         }
       }
     }
-  };
+  }, [androidStoreLink, iosStoreLink]);
 
-  const checkIfUserUpdated = async () => {
+  const checkIfUserUpdated = useCallback(async () => {
     try {
       const storedVersion = await getStoredValue({
         storageTag: STORED_VERSION_UPDATE_KEY,
@@ -502,7 +510,7 @@ export const ManualUpdateOverlay = ({
     } catch (e) {
       console.log(e, 'Error story current version');
     }
-  };
+  }, [currentVersion, whatsNewDescription, fetchWhatsNew]);
 
   const onDownloadButtonPress = () => {
     Linking.openURL(Platform.OS == 'ios' ? iosStoreLink : androidStoreLink);
@@ -518,6 +526,7 @@ export const ManualUpdateOverlay = ({
     androidStoreLink,
     whatsNewDescription,
     isWhatsNewRequired,
+    checkIfUserUpdated,
   ]);
 
   return (
