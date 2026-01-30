@@ -38,7 +38,6 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-app-update-helper-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -99,9 +98,6 @@
     "react": ">=19.0.0",
     "react-native": ">=0.80.0"
   },
-  "workspaces": [
-    "example"
-  ],
   "packageManager": "yarn@3.6.1",
   "release-it": {
     "git": {
