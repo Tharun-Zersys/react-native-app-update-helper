@@ -8,5 +8,5 @@ module.exports = {
   haste: {
     defaultPlatform: 'ios',
   },
-  testTimeout: 100000
+  testTimeout: 100000,
 };

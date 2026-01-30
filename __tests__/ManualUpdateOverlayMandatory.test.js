@@ -98,7 +98,9 @@ describe('ManualUpdateOverlay', () => {
   });
 
   it('opens the store link when the update button is pressed', async () => {
-    const mockLinkingOpenURL = jest.spyOn(Linking, 'openURL').mockImplementation(jest.fn());
+    const mockLinkingOpenURL = jest
+      .spyOn(Linking, 'openURL')
+      .mockImplementation(jest.fn());
 
     const { getByText, debug } = setup({
       updateAvailable: true,

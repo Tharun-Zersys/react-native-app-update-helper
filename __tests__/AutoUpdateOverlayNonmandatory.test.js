@@ -76,7 +76,9 @@ describe('AutoUpdateOverlay', () => {
   });
 
   it('opens the store link when the update button is pressed', async () => {
-    const mockLinkingOpenURL = jest.spyOn(Linking, 'openURL').mockImplementation(jest.fn());
+    const mockLinkingOpenURL = jest
+      .spyOn(Linking, 'openURL')
+      .mockImplementation(jest.fn());
 
     const { getByText } = setup({
       currentVersion: '1.2.0',
