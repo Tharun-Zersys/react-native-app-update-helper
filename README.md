@@ -4,7 +4,7 @@
 
 <!-- [![Version][version-badge]][package] -->
 
-![Build Test](https://github.com/zersys/react-native-app-update-helper/actions/workflows/main.yml/badge.svg?event=push&branch=master)
+![Build Test](https://github.com/zersys/react-native-app-update-helper/actions/workflows/ci.yml/badge.svg?event=push&branch=master)
 [![MIT License][license-badge]][license]
 [![Version](https://img.shields.io/npm/v/react-native-app-update-helper)](https://www.npmjs.com/package/react-native-app-update-helper)
 
