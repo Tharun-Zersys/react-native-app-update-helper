@@ -15,14 +15,14 @@ const { width, height } = Dimensions.get('window');
 interface AppUpdatedOverlayProps {
   content: string;
   version: string;
-  primaryColor: string;
-  backgroundColor: string;
-  titleFontFamily: string;
-  descriptionFontFamily: string;
-  buttonTitleFontFamily: string;
-  titleFontSize: number;
-  descriptionFontSize: number;
-  buttonTitleFontSize: number;
+  primaryColor?: string;
+  backgroundColor?: string;
+  titleFontFamily?: string;
+  descriptionFontFamily?: string;
+  buttonTitleFontFamily?: string;
+  titleFontSize?: number;
+  descriptionFontSize?: number;
+  buttonTitleFontSize?: number;
 }
 
 export const AppUpdatedOverlay: React.FC<AppUpdatedOverlayProps> = ({
@@ -33,9 +33,9 @@ export const AppUpdatedOverlay: React.FC<AppUpdatedOverlayProps> = ({
   titleFontFamily,
   descriptionFontFamily,
   buttonTitleFontFamily,
-  titleFontSize,
-  descriptionFontSize,
-  buttonTitleFontSize,
+  titleFontSize = 20,
+  descriptionFontSize = 14,
+  buttonTitleFontSize = 14,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
 

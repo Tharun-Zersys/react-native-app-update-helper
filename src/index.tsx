@@ -18,42 +18,42 @@ interface AutoUpdateOverlayProps {
   currentVersion: string;
   iosStoreLink: string;
   androidStoreLink: string;
-  primaryColor: string;
-  backgroundColor: string;
-  icon: ImageSourcePropType;
-  mainTitle: string;
-  description: string;
-  buttonTitle: string;
-  titleFontFamily: string;
-  descriptionFontFamily: string;
-  buttonTitleFontFamily: string;
-  titleFontSize: number;
-  descriptionFontSize: number;
-  buttonTitleFontSize: number;
-  isWhatsNewRequired: boolean;
-  whatsNewDescription: string;
+  primaryColor?: string;
+  backgroundColor?: string;
+  icon?: ImageSourcePropType;
+  mainTitle?: string;
+  description?: string;
+  buttonTitle?: string;
+  titleFontFamily?: string;
+  descriptionFontFamily?: string;
+  buttonTitleFontFamily?: string;
+  titleFontSize?: number;
+  descriptionFontSize?: number;
+  buttonTitleFontSize?: number;
+  isWhatsNewRequired?: boolean;
+  whatsNewDescription?: string;
 }
 interface ManualUpdateOverlayProps {
-  updateAvailable: any;
+  updateAvailable?: boolean;
   iosStoreLink: string;
   androidStoreLink: string;
   currentVersion: string;
-  icon: ImageSourcePropType;
-  mainTitle: string;
-  description: string;
-  buttonTitle: string;
-  primaryColor: string;
-  backgroundColor: string;
-  titleFontFamily: string;
-  descriptionFontFamily: string;
-  buttonTitleFontFamily: string;
-  titleFontSize: number;
-  descriptionFontSize: number;
-  buttonTitleFontSize: number;
-  isMandatoryUpdate: boolean;
-  whatsNewDescription: string;
-  isWhatsNewRequired: boolean;
-  onDismissButtonPress: () => void;
+  icon?: ImageSourcePropType;
+  mainTitle?: string;
+  description?: string;
+  buttonTitle?: string;
+  primaryColor?: string;
+  backgroundColor?: string;
+  titleFontFamily?: string;
+  descriptionFontFamily?: string;
+  buttonTitleFontFamily?: string;
+  titleFontSize?: number;
+  descriptionFontSize?: number;
+  buttonTitleFontSize?: number;
+  isMandatoryUpdate?: boolean;
+  whatsNewDescription?: string;
+  isWhatsNewRequired?: boolean;
+  onDismissButtonPress?: () => void;
 }
 
 const { width } = Dimensions.get('window');
@@ -437,7 +437,7 @@ export const ManualUpdateOverlay = ({
   isWhatsNewRequired = true,
   isMandatoryUpdate,
   whatsNewDescription,
-  onDismissButtonPress,
+  onDismissButtonPress = () => {},
   titleFontFamily,
   descriptionFontFamily,
   buttonTitleFontFamily,
